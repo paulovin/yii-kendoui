@@ -1,13 +1,13 @@
 <?php
 
 // uncomment the following to define a path alias
-// Yii::setPathOfAlias('local','path/to/local-folder');
+Yii::setPathOfAlias('kendoui',realpath(dirname(__FILE__) . '/../../../../kendoui/'));
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'Yii-KendoUI Demo',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -19,6 +19,7 @@ return array(
 	),
 
 	'modules'=>array(
+		'application.kendoui',
 		// uncomment the following to enable the Gii tool
 		/*
 		'gii'=>array(

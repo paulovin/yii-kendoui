@@ -21,6 +21,10 @@ class KWidget extends CWidget {
 	 */
 	public $htmlOptions = array();
 	/**
+	 * Widget height (may not apply to all cases).
+	 */
+	public $height;
+	/**
 	 * Diretório dos 'assets' dos widgets.
 	 */
 	protected $assetsDir;

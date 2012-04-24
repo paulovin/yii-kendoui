@@ -38,24 +38,81 @@ class KGrid extends KWidget {
 	 */
 	public $columns;
 	/**
-	 * Fonte de dados do grid
+	 * Instance of DataSource or Object with DataSource configuration.
 	 */
 	public $dataSource;
 	/**
-	 * Template usado para renderizar as linhas de detalhe no grid.
+	 * Template to be used for rendering the detail rows in the grid. See KendoUI's "Detail Template" example.
 	 */
 	public $detailTemplate;
-	
-	public $height;
-
+	/**
+	 * Indicates whether editing is enabled/disabled.
+	 * <ul>
+	 * <li>confirmation: Defines the text that will be used in confirmation box when delete an item.</li>
+	 * <li>destroy: Indicates whether item should be deleted when click on delete button.</li>
+	 * <li>mode: Indicates which of the available edit modes(incell(default)/inline/popup) will be used</li>
+	 * <li>template: Template which will be use during popup editing</li>
+	 * <li>update: Indicates whether item should be switched to edit mode on click.</li>
+	 * </ul>
+	 */
+	public $editable;
+	/**
+	 * Indicates whether grouping is enabled/disabled.
+	 */	
 	public $groupable;
-	
-	public $sortable;
-	
+	/**
+	 * Indicates whether keyboard navigation is enabled/disabled.
+	 */
+	public $navigatable;
+	/**
+	 * Indicates whether paging is enabled/disabled.
+	 */
 	public $pageable;
-	
+	/**
+	 * Template to be used for rendering the rows in the grid.
+	 */
+	public $rowTemplate;
+	/**
+	 * Enable/disable grid scrolling. Possible values:
+	 * <ul>
+	 * <li>true: Enables grid vertical scrolling</li>
+	 * <li>false: Disables grid vertical scrolling</li>
+	 * <li>'virtual' => 'false': Enables grid vertical scrolling without data virtualization. Same as first option.</li>
+	 * <li>'virtual' => 'true': Enables grid vertical scrolling with data virtualization.</li>
+	 * </ul>
+	 */
 	public $scrollable;
-	
+	/**
+	 * Indicates whether selection is enabled/disabled. Possible values:
+	 * <ul>
+	 * <li>row: Single row selection</li>
+	 * <li>cell: Single cell selection</li>
+	 * <li>multiple, row: Multiple row selection</li>
+	 * <li>multiple, cell: Multiple cell selection</li>
+	 * </ul>
+	 */
+	public $selectable;
+	/**
+	 * Defines whether grid columns are sortable.
+	 * <ul>
+	 * <li>allowUnsort: Defines whether column can have unsorted state</li>
+	 * <li>mode: Defines sorting mode. Possible values: </li>
+	 *   <ul>
+	 *   <li>single: Defines that only once column can be sorted at a time</li>
+	 *   <li>multiple: Defines that multiple columns can be sorted at a time</li>
+	 *   </ul>
+	 * </ul>
+	 */
+	public $sortable;
+	/**
+	 * This is a list of commands for which the corresponding buttons will be rendered. The supported built-in commands are: "create", "cancel", "save", "destroy".
+	 * <ul>
+	 * <li>name: The name of the command. One of the predefined or a custom</li>
+	 * <li>template: The template for the command button</li>
+	 * <li>text: The text of the command that will be set on the button</li>
+	 * </ul>
+	 */
+	public $toolbar;
 	
 	/**
 	 * Inicializa o widget
