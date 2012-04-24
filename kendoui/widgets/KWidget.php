@@ -19,7 +19,7 @@ class KWidget extends CWidget {
 	/**
 	 * Opções HTML para a renderização do widget.
 	 */
-	public $htmlOptions = array();
+	public $htmlOptions;
 	/**
 	 * Widget height (may not apply to all cases).
 	 */
@@ -39,6 +39,7 @@ class KWidget extends CWidget {
 	public function __construct($owner = null) {
 		parent::__construct($owner);
 		$this->assetsDir = dirname(__FILE__) . '/../assets/';
+		$htmlOptions = array();
 	}
 	
 	/**

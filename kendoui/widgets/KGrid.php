@@ -124,11 +124,42 @@ class KGrid extends KWidget {
 	 * Executa o widget.
 	 */
 	public function run() {
-		echo 'hello, widget<br>';
+		echo 'hello, widget<br>' . "\n";
+		$id = $this->getId();
+		$scriptOptions = array ();
+			
+		if (isset($this->htmlOptions['id'])) {
+			$id = $this->htmlOptions['id'];
+		} else {
+			$this->htmlOptions['id']=$id;
+		}
+        echo CHtml::openTag('div', $this->htmlOptions) . "\n";
 		// TODO: renderizar
+		echo CHtml::closeTag('div')  . "\n";
 		$this->registerClientScript();
-		// TODO: criar script de inicialização
-		echo 'bye, widget<br>';
+		
+		// popula o array de configurações
+		$this->addOption(&$scriptOptions, 'autoBind', $this->autoBind);
+		$this->addOption(&$scriptOptions, 'columns', $this->columns);
+		$this->addOption(&$scriptOptions, 'dataSource', $this->dataSource);
+		$this->addOption(&$scriptOptions, 'detailTemplate', $this->detailTemplate);
+		$this->addOption(&$scriptOptions, 'editable', $this->editable);
+		$this->addOption(&$scriptOptions, 'groupable', $this->groupable);
+		$this->addOption(&$scriptOptions, 'navigatable', $this->navigatable);
+		$this->addOption(&$scriptOptions, 'pageable', $this->pageable);
+		$this->addOption(&$scriptOptions, 'rowTemplate', $this->rowTemplate);
+		$this->addOption(&$scriptOptions, 'scrollable', $this->scrollable);
+		$this->addOption(&$scriptOptions, 'pageable', $this->pageable);
+		$this->addOption(&$scriptOptions, 'rowTemplate', $this->rowTemplate);
+		$this->addOption(&$scriptOptions, 'scrollable', $this->scrollable);
+		$this->addOption(&$scriptOptions, 'selectable', $this->selectable);
+		$this->addOption(&$scriptOptions, 'sortable', $this->sortable);
+		$this->addOption(&$scriptOptions, 'toolbar', $this->toolbar);
+		$this->addOption(&$scriptOptions, 'height', $this->height);
+		// cria o "hook" de inicialização do widget:
+		$cs = Yii::app()->getClientScript();
+		$cs->registerScript('KendoUI.KWidget#' . $id, "jQuery(\"#{$id}\").kendoGrid(" . CJavaScript::encode($scriptOptions) . ")", CClientScript::POS_LOAD);
+		echo 'bye, widget<br>' . "\n";
 	}
 	
 	/**
@@ -138,5 +169,21 @@ class KGrid extends KWidget {
 		$this->loadBaseAssets();
 		$this->loadJs('kendo.grid.min.js');
 	}
-
+	
+	/**
+	 * Adds an option to a configuration array.
+	 * 
+	 * @param $config array bening populated
+	 * @param $name the key used in the configuration
+	 * @param $value value being put into the array
+	 */
+	protected function addOption($config, $name, $value) {
+		$ok = $value != null || ($value != null && is_array($value) && count($value) > 0);
+		
+		if ($ok) {
+			$config[$name] = $value;
+		}
+		//print_r($config);
+	}
+	
 }
