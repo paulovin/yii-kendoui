@@ -124,7 +124,6 @@ class KGrid extends KWidget {
 	 * Executa o widget.
 	 */
 	public function run() {
-		echo 'hello, widget<br>' . "\n";
 		$id = $this->getId();
 		$scriptOptions = array ();
 			
@@ -159,7 +158,6 @@ class KGrid extends KWidget {
 		// cria o "hook" de inicialização do widget:
 		$cs = Yii::app()->getClientScript();
 		$cs->registerScript('KendoUI.KWidget#' . $id, "jQuery(\"#{$id}\").kendoGrid(" . CJavaScript::encode($scriptOptions) . ")", CClientScript::POS_LOAD);
-		echo 'bye, widget<br>' . "\n";
 	}
 	
 	/**
