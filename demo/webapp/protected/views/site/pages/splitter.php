@@ -46,7 +46,8 @@ $this->widget('kendoui.widgets.KSplitter', array(
 			'content' => '<h3>Outer splitter / bottom pane</h3><p>Non-resizable and non-collapsible.</p>',
 			'collapsible' => false,
 			'resizable' => false,
-			'size' => "100px" 
+			'size' => "100px",
+			'htmlOptions' => array('id' => 'last_pane'),
 		),
 		'orientation' => 'vertical',
 	),

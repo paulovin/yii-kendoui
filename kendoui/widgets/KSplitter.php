@@ -62,14 +62,14 @@ class KSplitter extends KWidget {
 		for ($i = 0; $i < $paneCount; $i++) {
 			$paneId = $id . '_pane-' . $i;
 			$pane = $this->panes[$i];
-			$htmlOptions;
+			$htmlOptions = array();
 			
-			if (isset($pane->htmlOptions['id'])) {
-				$htmlOptions = $pane->htmlOptions;
+			if (isset($pane['htmlOptions'])) {
+				$htmlOptions = $pane['htmlOptions'];
 				$paneId = $htmlOptions['id'];
-			} else {
-				$htmlOptions['id'] = $paneId;
+				unset($this->panes[$i]['htmlOptions']);
 			}
+			$htmlOptions['id'] = $paneId;
 			echo CHtml::openTag('div', $htmlOptions) . "\n";
 			
 			// Inclui um conteúdo estático:
