@@ -111,6 +111,7 @@ class KSplitter extends KWidget {
 		
 		$this->registerClientScript();
 		echo CHtml::closeTag('div')  . "\n";
+		$this->addBasicOptions(&$scriptOptions);
 		if (count($this->panes) > 0) {
 			$scriptOptions['panes'] = $this->panes;
 		}

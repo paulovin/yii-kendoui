@@ -138,6 +138,7 @@ class KGrid extends KWidget {
 		$this->registerClientScript();
 		
 		// popula o array de configurações
+		$this->addBasicOptions(&$scriptOptions);
 		$this->addOption(&$scriptOptions, 'autoBind', $this->autoBind);
 		$this->addOption(&$scriptOptions, 'columns', $this->columns);
 		$this->addOption(&$scriptOptions, 'dataSource', $this->dataSource);
@@ -154,7 +155,6 @@ class KGrid extends KWidget {
 		$this->addOption(&$scriptOptions, 'selectable', $this->selectable);
 		$this->addOption(&$scriptOptions, 'sortable', $this->sortable);
 		$this->addOption(&$scriptOptions, 'toolbar', $this->toolbar);
-		$this->addOption(&$scriptOptions, 'height', $this->height);
 		// cria o "hook" de inicialização do widget:
 		$cs = Yii::app()->getClientScript();
 		$cs->registerScript('KendoUI.KWidget#' . $id, "jQuery(\"#{$id}\").kendoGrid(" . CJavaScript::encode($scriptOptions) . ")", CClientScript::POS_LOAD);
@@ -165,23 +165,7 @@ class KGrid extends KWidget {
 	 */
 	protected function registerClientScript() {
 		$this->loadBaseAssets();
-		$this->loadJs('kendo.grid.min.js');
-	}
-	
-	/**
-	 * Adds an option to a configuration array.
-	 * 
-	 * @param $config array bening populated
-	 * @param $name the key used in the configuration
-	 * @param $value value being put into the array
-	 */
-	protected function addOption($config, $name, $value) {
-		$ok = $value != null || ($value != null && is_array($value) && count($value) > 0);
-		
-		if ($ok) {
-			$config[$name] = $value;
-		}
-		//print_r($config);
+		// $this->loadJs('kendo.grid.min.js');
 	}
 	
 }

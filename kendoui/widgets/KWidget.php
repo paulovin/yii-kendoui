@@ -25,6 +25,10 @@ class KWidget extends CWidget {
 	 */
 	public $height;
 	/**
+	 * Widget width.
+	 */
+	public $width;
+	/**
 	 * Diretório dos 'assets' dos widgets.
 	 */
 	protected $assetsDir;
@@ -87,6 +91,31 @@ class KWidget extends CWidget {
 	protected function loadJs($name) {
 		$cs = Yii::app()->getClientScript();
 		$cs->registerScriptFile($this->getAssetsUrl() . '/' . self::JS_DIR . '/' . $name);
+	}
+	
+	/**
+	 * Adds an option to a configuration array.
+	 * 
+	 * @param $config array bening populated (must pass by value)
+	 * @param $name the key used in the configuration
+	 * @param $value value being put into the array
+	 */
+	protected function addOption($config, $name, $value) {
+		$ok = $value != null || ($value != null && is_array($value) && count($value) > 0);
+		
+		if ($ok) {
+			$config[$name] = $value;
+		}
+	}
+	
+	/**
+	 * Adds the basic config options to the widget's configuration array.
+	 * 
+	 * @param $config array bening populated (must pass by value)
+	 */
+	protected function addBasicOptions($config) {
+		$this->addOption(&$config, 'height', $this->height);
+		$this->addOption(&$config, 'width', $this->width);
 	}
 	
 }
