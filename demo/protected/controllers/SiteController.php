@@ -100,4 +100,19 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+	
+	/**
+	 * Renders the partial view page.
+	 */
+	public function actionPartialView() {
+		$this->renderPartial('partialView');
+	}
+	
+	/**
+	 * Renders the partial view page.
+	 */
+	public function actionCompleteView() {
+		$this->renderPartial('completeView');
+	}
+	
 }

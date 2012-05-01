@@ -30,7 +30,15 @@
 	$this->widget('application.extensions.mbmenu.MbMenu',array(
 		'items'=>array(
 			array('label'=>'Home', 'url'=>array('/site/index')),
-			array('label'=>'Splitter', 'url'=>array('/site/page', 'view'=>'splitter')),
+			array(
+				'label'=>'Splitter', 
+				'url'=>array('/site/page', 'view'=>'splitter'),
+				'items' => array(
+					array('label'=>'Basic usage', 'url'=>array('/site/page', 'view'=>'splitter'),),
+					array('label' => 'AJAX', 'url' => array('/site/page', 'view'=>'splitter-ajax')),
+					array('label' => 'Using views', 'url' => array('/site/page', 'view'=>'splitter-view')),
+				),
+			),
 			array('label'=>'Grid', 'url'=>array('/site/page', 'view'=>'grid')),
 		),
 	));

@@ -1,14 +1,16 @@
 <?php
+Yii::import('kendoui.widgets.KSplitter');
+
 $this->pageTitle=Yii::app()->name . ' - Splitter';
 $this->breadcrumbs=array(
-	'About',
+	'Splitter',
 );
 ?>
 <h1>Splitter</h1>
 
 <p>This is a Splitter  widget example based on KendoUI's basic example. It enables you to create 
 	the whole content of the splitter dynamically and load its content from a partial view or an
-	AJAX request (in progress).</p>
+	AJAX request.</p>
 
 <?php
 $this->widget('kendoui.widgets.KSplitter', array(
@@ -73,15 +75,7 @@ $style = <<<EOD
 EOD;
 $cs->registerCss('aff', $style);
 
-$script = <<<EOT
-var onTopResize = function(e) {
-	//$('#horizontal').data('kendoSplitter').size('#top-pane', 200 + 'px').trigger('resize');
-	// $("#horizontal").height(170).trigger("resize");
-};
-$("#vertical").data('kendoSplitter').bind('resize', onTopResize);
-//$("#horizontal").height(170).trigger("resize");
-EOT;
-$cs->registerScript('aff', $script, CClientScript::POS_LOAD)
+KSplitter::applyNestedSplitterFix('horizontal', 'vertical');
 ?>
 
 <p>You can see the original <a href="http://demos.kendoui.com/web/splitter/index.html" target="_blank">here</a></p>
@@ -141,5 +135,15 @@ echo $phpLighter->highlight("<?php
 		'orientation' => 'vertical',
 	),
 	'htmlOptions' => array('id' => 'vertical'),
-));") 
+));
+?>");
+?>
+
+<p>Due to a current bug that occurs with nested splitters, the following additional code is also
+	necessary AFTER creating all of them:</p>
+<?php
+echo $phpLighter->highlight("<?php
+// you gotta import 'kendoui.widgets.KSplitter' first
+KSplitter::applyNestedSplitterFix('horizontal', 'vertical'); 
+?>");
 ?>

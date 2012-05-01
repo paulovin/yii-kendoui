@@ -32,6 +32,26 @@ class KSplitter extends KWidget {
 	public $orientation = self::HORIZONTAL;
 	
 	/**
+	 * Applies a fix to nested splitters dimensions. It must be called only after the creation of
+	 * the said splitters AND its parent.
+	 * 
+	 * @param $splitter string The splitter being fixed
+	 * @param $parent string The parent splitter
+	 * @param height string The nested splitter desired height (default: 100%)
+	 * @param width string The nested splitter desired height (default: 100%)
+	 * 	 */
+	public static function applyNestedSplitterFix($splitter, $parent, $height = '100%', $width = '100%') {
+		$cs = Yii::app()->clientScript;
+		
+		$script = "var onResize = function(e){setTimeout(function() {\$('#$splitter').data('kendoSplitter').trigger('resize');}, 1);};\n";
+		$script .= "\$('#$splitter').css({height:'$height', width:'$width'});\n";
+		$script .= "\$('#vertical').data('kendoSplitter').bind('resize', onResize);\n";
+		$script .= "\$('#$splitter').data('kendoSplitter').trigger('resize');\n";
+
+		$cs->registerScript($splitter . '_splitter-fix', $script, CClientScript::POS_LOAD);
+	}
+	
+	/**
 	 * Inicializa o widget
 	 */
 	public function init() {
@@ -76,9 +96,7 @@ class KSplitter extends KWidget {
 			if (isset($pane['content'])) {
 				$content = $pane['content'];
 				// renderiza o conteúdo passado diretamente para o widget
-				if (!is_array($content)) {
-					echo $content;
-				}
+				echo $content;
 				unset($this->panes[$i]['content']);
 			}
             // Carrega o conteúdo de uma view do sistema:
@@ -95,12 +113,6 @@ class KSplitter extends KWidget {
 				$this->getController()->renderPartial($view, $data);
 				unset($this->panes[$i]['view']);
 			}
-			// carrega dinamicamente o conteúdo via AJAX
-			else if (isset($content['ajax'])) {
-				// TODO: implementar
-				//$tabsOut .= strtr($this->headerTemplate, array('{title}'=>$title, '{url}'=>CHtml::normalizeUrl($content['ajax']), '{id}'=>'#' . $tabId))."\n";
-				echo '<h3>Suporte a Ajax ainda não implementado</h3>';
-            } 
 			// unset($this->panes[$i]['content']);
 			if (count($this->panes[$i]) == 0) {
 				unset($this->panes[$i]);
