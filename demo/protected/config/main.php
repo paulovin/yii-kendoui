@@ -1,7 +1,7 @@
 <?php
 
 // uncomment the following to define a path alias
-Yii::setPathOfAlias('kendoui',realpath(dirname(__FILE__) . '/../../../../kendoui/'));
+Yii::setPathOfAlias('kendoui',realpath(dirname(__FILE__) . '/../../../kendoui/'));
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
