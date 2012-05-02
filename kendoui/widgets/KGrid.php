@@ -133,7 +133,6 @@ class KGrid extends KWidget {
 			$this->htmlOptions['id']=$id;
 		}
         echo CHtml::openTag('div', $this->htmlOptions) . "\n";
-		// TODO: renderizar
 		echo CHtml::closeTag('div')  . "\n";
 		$this->registerClientScript();
 		

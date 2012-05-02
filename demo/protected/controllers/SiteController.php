@@ -2,6 +2,13 @@
 
 class SiteController extends Controller
 {
+	
+	private static $firstNames = null;
+	private static $lastNames = null;
+	private static $cities = null;
+	private static $titles = null;
+	private static $birthDates = null;
+	
 	/**
 	 * Declares class-based actions.
 	 */
@@ -113,6 +120,32 @@ class SiteController extends Controller
 	 */
 	public function actionCompleteView() {
 		$this->renderPartial('completeView');
+	}
+	
+	public function actionRandomData($size) {
+		// initializes the data arrays
+		if (self::$firstNames == null) {
+			self::$firstNames = array("Nancy", "Andrew", "Janet", "Margaret", "Steven", "Michael", "Robert", "Laura", "Anne", "Nige");
+    		self::$lastNames = array("Davolio", "Fuller", "Leverling", "Peacock", "Buchanan", "Suyama", "King", "Callahan", "Dodsworth", "White");
+    		self::$cities = array("Seattle", "Tacoma", "Kirkland", "Redmond", "London", "Philadelphia", "New York", "Seattle", "London", "Boston");
+    		self::$titles = array("Accountant", "Vice President, Sales", "Sales Representative", "Technical Support", "Sales Manager", "Web Designer","Software Developer", "Inside Sales Coordinator", "Chief Techical Officer", "Chief Execute Officer");
+    		self::$birthDates = array("1948/12/08", "1952/02/19", "1963/08/30", "1937/09/19", "1955/03/04", "1963/07/02", "1960/05/29", "1958/01/09", "1966/01/27", "1966/03/27");
+		}
+		$ret = array();
+		
+		for ($i = 0; $i < $size; $i++) {
+			$ret[] = array(
+				'Id' => $i,
+				'FirstName' => self::$firstNames[rand(0, count(self::$firstNames) - 1)],
+				'LastName' => self::$lastNames[rand(0, count(self::$lastNames) - 1)],
+				'City' => self::$cities[rand(0, count(self::$cities) - 1)],
+				'Title' => self::$titles[rand(0, count(self::$titles) - 1)],
+				'BirthDate' => self::$birthDates[rand(0, count(self::$birthDates) - 1)],
+				'Age' => rand(0, 100),
+			);
+		}
+		echo CJSON::encode($ret);
+		Yii::app()->end();
 	}
 	
 }

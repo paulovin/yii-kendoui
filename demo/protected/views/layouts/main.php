@@ -39,7 +39,13 @@
 					array('label' => 'Using views', 'url' => array('/site/page', 'view'=>'splitter-view')),
 				),
 			),
-			array('label'=>'Grid', 'url'=>array('/site/page', 'view'=>'grid')),
+			array(
+				'label'=>'Grid', 
+				'url'=>array('/site/page', 'view'=>'grid'),
+				'items' => array(
+					array('label'=>'Basic usage', 'url'=>array('/site/page', 'view'=>'grid')),
+				),
+			),
 		),
 	));
 	?>

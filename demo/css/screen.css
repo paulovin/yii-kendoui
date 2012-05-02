@@ -236,3 +236,6 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 .clearfix:after, .container:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
 .clearfix, .container {display:block;}
 .clear {clear:both;}
+
+/* This fixes KendoGrid wird renderization under Yii's default styling: */
+.k-grid-header-wrap table {margin-bottom:0;}
